@@ -30,7 +30,7 @@ const Register = () => {
 
   const onSubmit = (data: RegisterFormData) => {
     mutation.mutate(data);
-    console.log(data);
+    // console.log(data);
   };
 
   return (
