@@ -44,7 +44,11 @@ router.post(
                 maxAge: 86400000 // 1 day
             });
 
+<<<<<<< HEAD
             return res.status(200).send({ message: "User registered successfully" });
+=======
+            return res.status(201).json({ message: "User registered successfully" });
+>>>>>>> e7a619a55e3f37eed7984377953008e52f364363
         } catch (error) {
             console.error("Error during registration:", error);
             return res.status(500).json({ message: "Internal server error" });
