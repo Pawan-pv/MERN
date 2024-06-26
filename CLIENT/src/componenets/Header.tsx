@@ -13,7 +13,6 @@ export const Header = () => {
           {isLoggedIn?(
            <>
           <Link to="/my-bookings" >My Bookings</Link>
-          <Link to="/my-hotels" >My hotels</Link>
           <button>Sign out</button>
           </>) :  (
                <Link

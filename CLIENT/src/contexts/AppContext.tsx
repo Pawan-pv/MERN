@@ -19,7 +19,7 @@ export const AppContextProvider = (
 { children }: { children: React.ReactNode } )=> {
     const [toast , setToast] = useState<ToastMessage | undefined>(undefined)
    
-    const { isError } = useQuery("validtateToken", apiClient.validateToken,{
+    const { isError } = useQuery("validateToken", apiClient.validateToken,{
         retry: false,
     })
    
