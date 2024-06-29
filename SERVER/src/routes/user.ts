@@ -32,19 +32,23 @@ router.post(
             user = new User({ email, firstName, lastName, password });
             await user.save();
 
+            // jwt.sign(payload, secretOrPrivateKey, [options, callback])
             const token = jwt.sign(
-                { userId: user.id },
-                process.env.JWT_SECRET_KEY as string,
-                { expiresIn: "1d" }
-            );
+                { userId: user.id },                // payload
+                process.env.JWT_SECRET_KEY as string,  // secretOrPrivateKey
+                { expiresIn: "1d" }                // options
+              );
+              
 
-            res.cookie("auth_token", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                maxAge: 86400000 // 1 day
-            });
+              res.cookie("auth_token", token, {
+                httpOnly: true,                          // Cookie accessible only by the web server
+                secure: process.env.NODE_ENV === "production",  // Cookie sent only over HTTPS in production
+                maxAge: 86400000,                        // Cookie expires in 1 day (milliseconds)
+              });
+
 
             return res.status(200).send({ message: "User registered successfully" });
+            
         } catch (error) {
             console.error("Error during registration:", error);
             return res.status(500).json({ message: "Internal server error" });

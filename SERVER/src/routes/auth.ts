@@ -31,13 +31,15 @@ router.post(
       if (!isMatch) {
         return res.status(400).json({ message: "Invalid email or password" });
       }
-    const token = jwt.sign(
+    
+      const token = jwt.sign(
         {userId: user.id},
         process.env.JWT_SECRET_KEY as string,
         {
             expiresIn: "1d"
         }
-    );
+        );
+
     res.cookie("auth_token", token,{
         httpOnly: true,
         secure: process.env.NODE_ENV ==="production",
@@ -45,6 +47,8 @@ router.post(
     })
 
       res.status(200).json({userID: user.id  ,message: "Login successful" });
+
+      
     } catch (error) {
       console.error("Something went wrong", error);
       res.status(500).json({ message: "Server error" });
@@ -54,6 +58,13 @@ router.post(
 
 router.get("/validate-token", verifyToken, (req: Request, res: Response)=>{
   res.status(200).send({userId: req.userId})
+})
+
+router.post("/logout", (req: Request, res: Response)=>{
+  res.cookie("auth_token", {
+  expires: new Date(0),
+  })
+  res.send();
 })
 
 export default router;

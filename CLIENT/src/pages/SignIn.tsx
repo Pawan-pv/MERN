@@ -1,9 +1,10 @@
 
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext"; // Ensure correct import path
 import * as apiClient from "../api-client";
+import { Link } from "react-router-dom";
 
 export type SignInFormData = {
     email: string;
@@ -11,14 +12,16 @@ export type SignInFormData = {
 }
 
 const SignIn = () => {
+    const queryClient = useQueryClient()
     const { register, formState: { errors }, handleSubmit } = useForm<SignInFormData>();
     const { showToast } = useAppContext();
     const navigate = useNavigate();
 
     const mutation = useMutation(apiClient.signIn, {
         onSuccess: async () => {
+            await queryClient.invalidateQueries('validateToken');
             showToast({ message: "User has been signed in", type: "SUCCESS" });
-            navigate("/home");
+            navigate("/");
         },
         onError: (error: any) => {
             console.log("error", error);
@@ -57,9 +60,16 @@ const SignIn = () => {
                 />
                 {errors.password && <span>{errors.password.message}</span>}
             </label>
-            <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+            <span className="flex items-center justify-between">
+                <span className="text-sm">
+                    Not Registered? <Link className="underline" to="/register" >Create an account here</Link>
+                </span>
+            <button 
+            type="submit" 
+            className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
                 Login
             </button>
+            </span>
         </form>
     );
 }
