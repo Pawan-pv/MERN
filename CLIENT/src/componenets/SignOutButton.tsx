@@ -10,11 +10,11 @@ const { showToast }  = useAppContext();
 
 const mutation = useMutation(apiClient.signOut, {
     onSuccess: async ()=>{
-    await querryClient.invalidateQueries("validateToken")
-    showToast({ message: "Sign Out!!", type: "SUCCESS"})
+        await querryClient.invalidateQueries("validateToken")
+        showToast({ message: "Sign Out!!", type: "SUCCESS"})
     },
     onError: (error: Error)=>{
-    showToast({ message: error.message, type: "ERROR"})   
+        showToast({ message: error.message, type: "ERROR"})   
     }
 })
 

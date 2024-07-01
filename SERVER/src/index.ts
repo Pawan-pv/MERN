@@ -27,9 +27,10 @@ app.use("/api/users", userRoutes)
 
 ;(async () => {
     await mongoose.connect(process.env.MONGO_URL as string)
+    // await mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)
  .then(  () =>{
     app.listen(8000, () => {
-        console.log("DB IS CONNECTED SUCSESSFULLY ");
+        console.log("DB IS CONNECTED  TO ( E2E )SUCSESSFULLY ");
         console.log("Server is running on port 8000");
     });
  })
