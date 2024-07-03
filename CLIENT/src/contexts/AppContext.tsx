@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Toast from "../componenets/Toast";
 import { useQuery } from "react-query";
-import * as apiClient from "../api-client.ts"
+import * as apiClient from "../api-client"
 
 type ToastMessage = {
     message: string;
