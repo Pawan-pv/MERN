@@ -4,6 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose"
 import userRoutes from "./routes/user"
 import authRoutes from "./routes/auth"
+import myHotelRoutes from "./routes/my-hotels"
 import cookieParser from "cookie-parser"
 import { v2 as cloudinary} from "cloudinary";
 
@@ -30,8 +31,11 @@ app.use(
 )      
 );
 
+// app.use(express.static(path.join(__dirname, "../../frontend/dist")))
+
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
+app.use("/api/my-hotels", myHotelRoutes)
 
 
 

@@ -14,7 +14,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment variables
-.env
+# .env
 .env.local
 .env.*.local
 
@@ -26,14 +26,14 @@ bower_components/
 .next/
 out/
 
-# Build directories
-dist/
-build/
-public/
+# # Build directories
+# dist/
+# build/
+# public/
 
-# Static files
-static/
+# # Static files
+# static/
 
-dist
+# dist
 
 # Coverage directory used by tools like istan
