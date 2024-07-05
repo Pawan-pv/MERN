@@ -6,13 +6,15 @@ import { check, validationResult } from 'express-validator';
 const router = express.Router();
 
 // Register route: /api/users/register
+
 router.post(
     "/register",
     [
         check("firstName", "First Name is required").isString(),
         check('lastName', 'Last Name is required').isString(),
         check('email', 'Email is required').isEmail(),
-        check('password', 'Password is required and must be at least 6 characters long').isLength({ min: 6 })
+        check('password', 'Password is required and must be at least 6 characters long')
+        .isLength({ min: 6 })
     ],
     async (req: Request, res: Response) => {
         const errors = validationResult(req);
@@ -32,11 +34,11 @@ router.post(
             user = new User({ email, firstName, lastName, password });
             await user.save();
 
-            // jwt.sign(payload, secretOrPrivateKey, [options, callback])
+            // jwt.sign( payload, secretOrPrivateKey, [options, callback] )
             const token = jwt.sign(
-                { userId: user.id },                // payload
+                { userId: user.id },                   // payload
                 process.env.JWT_SECRET_KEY as string,  // secretOrPrivateKey
-                { expiresIn: "1d" }                // options
+                { expiresIn: "1d" }                    // options
               );
               
 
