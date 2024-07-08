@@ -14,9 +14,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment variables
-# .env
+.env
 .env.local
 .env.*.local
+.env.e2e
 
 # Dependency directories
 jspm_packages/
@@ -35,5 +36,7 @@ out/
 # static/
 
 # dist
+
+.vdcode
 
 # Coverage directory used by tools like istan

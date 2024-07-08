@@ -9,17 +9,20 @@ const router = express.Router();
 
 router.post(
     "/register",
-    [
+        [
         check("firstName", "First Name is required").isString(),
         check('lastName', 'Last Name is required').isString(),
         check('email', 'Email is required').isEmail(),
         check('password', 'Password is required and must be at least 6 characters long')
         .isLength({ min: 6 })
-    ],
-    async (req: Request, res: Response) => {
+        ],
+        async (req: Request, res: Response) => {
+
         const errors = validationResult(req);
+
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400)
+            .json({ errors: errors.array() });
         }
 
         const { email, firstName, lastName, password } = req.body;
@@ -28,7 +31,8 @@ router.post(
             let user = await User.findOne({ email });
 
             if (user) {
-                return res.status(400).json({ message: "User already exists" });
+                return res.status(400)
+                .json({ message: "User already exists" });
             }
 
             user = new User({ email, firstName, lastName, password });

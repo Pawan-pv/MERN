@@ -18,7 +18,15 @@ require("dotenv/config");
 const mongoose_1 = __importDefault(require("mongoose"));
 const user_1 = __importDefault(require("./routes/user"));
 const auth_1 = __importDefault(require("./routes/auth"));
+const my_hotels_1 = __importDefault(require("./routes/my-hotels"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const cloudinary_1 = require("cloudinary");
+const path_1 = __importDefault(require("path"));
+cloudinary_1.v2.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRETE,
+});
 const app = (0, express_1.default)();
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
@@ -29,8 +37,14 @@ app.use((0, cors_1.default)({
     credentials: true,
     optionsSuccessStatus: 200
 }));
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../CLIENT/dist")));
 app.use("/api/auth", auth_1.default);
+// http://localhost:8000/api/auth/login
+// http://localhost:8000/api/auth/validate-token
+// http://localhost:8000/api/auth/logout
 app.use("/api/users", user_1.default);
+// http://localhost:8000/api/users/register
+app.use("/api/my-hotels", my_hotels_1.default);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield mongoose_1.default.connect(process.env.MONGO_URL)
         // await mongoose.connect(process.env.MONGO_CONNECTION_STRING as string)

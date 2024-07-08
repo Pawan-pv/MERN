@@ -22,21 +22,24 @@ router.post("/register", [
     (0, express_validator_1.check)("firstName", "First Name is required").isString(),
     (0, express_validator_1.check)('lastName', 'Last Name is required').isString(),
     (0, express_validator_1.check)('email', 'Email is required').isEmail(),
-    (0, express_validator_1.check)('password', 'Password is required and must be at least 6 characters long').isLength({ min: 6 })
+    (0, express_validator_1.check)('password', 'Password is required and must be at least 6 characters long')
+        .isLength({ min: 6 })
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400)
+            .json({ errors: errors.array() });
     }
     const { email, firstName, lastName, password } = req.body;
     try {
         let user = yield user_1.default.findOne({ email });
         if (user) {
-            return res.status(400).json({ message: "User already exists" });
+            return res.status(400)
+                .json({ message: "User already exists" });
         }
         user = new user_1.default({ email, firstName, lastName, password });
         yield user.save();
-        // jwt.sign(payload, secretOrPrivateKey, [options, callback])
+        // jwt.sign( payload, secretOrPrivateKey, [options, callback] )
         const token = jsonwebtoken_1.default.sign({ userId: user.id }, // payload
         process.env.JWT_SECRET_KEY, // secretOrPrivateKey
         { expiresIn: "1d" } // options

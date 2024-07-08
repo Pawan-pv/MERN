@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { HotelFormData } from './ManageHotelForm';
 
 function ImagesSection() {
+
     const {register, 
         formState: { errors }
     } = useFormContext<HotelFormData>();
@@ -14,11 +15,11 @@ function ImagesSection() {
         <h2 className="text-2xl font-bold mb-3">Images</h2>
         <div className="rounded border p-4 flex flex-col gap-4">
             <input 
-            type="file" 
-            multiple
-            accept= "image/*"
-            className='w-full text-gray-700 font-normal'
-            {...register("imageFiles", {
+             type="file" 
+             multiple
+             accept= "image/*"
+             className='w-full text-gray-700 font-normal'
+              {...register("imageFiles", {
                 validate: (imageFiles)=>{
                     const totalLength = imageFiles.length;
 

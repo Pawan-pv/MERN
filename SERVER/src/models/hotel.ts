@@ -7,7 +7,7 @@ export type HotelType = {
     name: string;
     city: string;
     country: string;
-    discription: string;
+    description: string;
     type: string;
     adultCount: number;
     childCount: number;
@@ -23,7 +23,7 @@ export type HotelType = {
         name: { type: String, required: true},
         city: { type: String, required: true},
         country: { type: String, required: true},
-        discription: { type: String, required: true},
+        description: { type: String, required: true},
         type: { type: String, required: true},
         adultCount: { type: Number, required: true},
         childCount: { type: Number, required: true},
@@ -38,19 +38,4 @@ export type HotelType = {
     const Hotel = mongoose.model<HotelType>("Hotel",hotelSchema);
 
     export default Hotel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

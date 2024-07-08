@@ -7,7 +7,7 @@ import authRoutes from "./routes/auth"
 import myHotelRoutes from "./routes/my-hotels"
 import cookieParser from "cookie-parser"
 import { v2 as cloudinary} from "cloudinary";
-
+import path from "path"
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -22,20 +22,30 @@ app.use(express.urlencoded({ extended: true }));
 
 console.log(process.env.FRONTEND_URL)
 app.use(
-     cors(
-{
+     cors({
         origin: process.env.FRONTEND_URL as string,
         credentials: true,
         optionsSuccessStatus: 200
-}
-)      
+})      
 );
 
-// app.use(express.static(path.join(__dirname, "../../frontend/dist")))
+app.use(express.static(path.join(__dirname, "../../CLIENT/dist")))
+
 
 app.use("/api/auth", authRoutes)
+
+// http://localhost:8000/api/auth/login
+// http://localhost:8000/api/auth/validate-token
+// http://localhost:8000/api/auth/logout
+
+
 app.use("/api/users", userRoutes)
+
+// http://localhost:8000/api/users/register
+
 app.use("/api/my-hotels", myHotelRoutes)
+
+// http://localhost:8000/api/my-hotels/
 
 
 

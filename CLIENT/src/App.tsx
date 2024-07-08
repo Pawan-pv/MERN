@@ -11,6 +11,7 @@ import { useAppContext } from './contexts/AppContext';
 function App() {
 
   const { isLoggedIn } = useAppContext();
+  
   return (
     <Router>
          <Routes>
