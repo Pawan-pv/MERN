@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 export interface UserType extends Document {
+  _id: string;
   email: string;
   password: string;
   firstName: string;
@@ -22,6 +23,6 @@ userSchema.pre<UserType>("save", async function (next) {
   next();
 });
 
-const User: Model<UserType> = mongoose.model<UserType>("User", userSchema);
+const User = mongoose.model<UserType>("User", userSchema);
 
 export default User;
