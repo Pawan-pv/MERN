@@ -1,9 +1,10 @@
 
 import React from 'react';
-import ManageHotelForm from '../forms/ManageHotelForm';
+// import ManageHotelForm from '../forms/manageHotel/ManageHotelForm';
 import { useMutation } from 'react-query';
 import { useAppContext } from '../contexts/AppContext';
 import * as apiClient from "../api-client";
+import ManageHotelForm from '../forms/manageHotelform/ManageHotelForm';
 
 const AddHotel = () => {
   const { showToast } = useAppContext();
@@ -24,10 +25,7 @@ const AddHotel = () => {
   };
 
   return (
-    <ManageHotelForm
-      onSave={handleSave}
-      isLoading={isLoading}
-    />
+    <ManageHotelForm onSave={handleSave} isLoading={isLoading} />
   );
 };
 

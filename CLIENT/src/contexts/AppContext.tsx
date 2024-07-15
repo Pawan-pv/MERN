@@ -22,11 +22,15 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     const { isError } = useQuery("validateToken", apiClient.validateToken, { retry: false, })
 
     return (
-        <AppContext.Provider  value={{showToast: (toastMessage) => {setToast(toastMessage);
-                    console.log(toastMessage);}, isLoggedIn: !isError
+        <AppContext.Provider  
+        value={{showToast: (toastMessage) => {
+        setToast(toastMessage);
+        console.log(toastMessage);},
+         isLoggedIn: !isError
             }}>
             {toast && (
-                <Toast message={toast.message}
+                <Toast 
+                    message={toast.message}
                     type={toast.type}
                     onClose={() => setToast(undefined)}
                 />)

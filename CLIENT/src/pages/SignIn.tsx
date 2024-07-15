@@ -23,7 +23,7 @@ const SignIn = () => {
             showToast({ message: "User has been signed in", type: "SUCCESS" });
             navigate("/");
         },
-        onError: (error: any) => {
+        onError: (error) => {
             console.log("error", error);
             showToast({ message: "Sign in failed", type: "ERROR" });
         },

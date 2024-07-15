@@ -21,9 +21,9 @@ const GuestsSection = () => {
               required: "This field is required",
             })}
           />
-          {errors.adultCount?.message && (
-            <span className="text-red-500 text-sm fold-bold">
-              {errors.adultCount?.message}
+          {errors.adultCount && (
+            <span className="text-red-500 text-sm font-bold">
+              {errors.adultCount.message}
             </span>
           )}
         </label>
@@ -37,15 +37,13 @@ const GuestsSection = () => {
               required: "This field is required",
             })}
           />
-          {errors.childCount?.message && (
-            <span className="text-red-500 text-sm fold-bold">
-              {errors.childCount?.message}
+          {errors.childCount && (
+            <span className="text-red-500 text-sm font-bold">
+              {errors.childCount.message}
             </span>
           )}
         </label>
       </div>
-    </div>
-  );
-};
+ </div> )}
 
-export default GuestsSection;
+ export default GuestsSection

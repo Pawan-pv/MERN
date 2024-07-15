@@ -67,7 +67,7 @@ export const signOut = async ()=> {
 export const addMyHotel = async (hotelFormData: FormData)=> {
 
 
-  const response = await fetch(`${API_BASE_URL}/api/my-hotels/`, {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
     
     method: "POST",
     credentials: "include",
@@ -75,8 +75,9 @@ export const addMyHotel = async (hotelFormData: FormData)=> {
 
   })
   if(!response.ok) {
-    throw new Error("Error occured  { in - api-Client --> on method - addMyHotel } while saving data in the ");
+    throw new Error("Error occured  on method - addMyHotel  while saving data in the ");
   }
+
 
   return response.json();
 };
