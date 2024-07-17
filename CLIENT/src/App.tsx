@@ -5,51 +5,63 @@ import Register from './pages/Register';
 import SignIn from './pages/SignIn';
 import AddHotel from './pages/AddHotel';
 import { useAppContext } from './contexts/AppContext';
+import MyHotels from './pages/MyHotels';
+import EditHotels from './pages/EditHotels';
 // import About from './pages/About';
 // import Contact from './pages/Contact';
 
 function App() {
 
   const { isLoggedIn } = useAppContext();
-  
+
   return (
     <Router>
-         <Routes>
+      <Routes>
 
-         <Route 
-            path='/' 
-            element={<Layout ><p>Home Page </p></Layout> } 
-         />
-        
-        <Route 
-             path='/search' 
-             element={<Layout><>search page</></Layout>} 
+        <Route
+          path='/'
+          element={<Layout ><p>Home Page </p></Layout>}
         />
 
         <Route
-            path = "/register"   
-            element ={<Layout>< Register/></Layout>}
-          />
+          path='/search'
+          element={<Layout><>search page</></Layout>}
+        />
 
-         <Route 
-            path='/sign-in' 
-            element={<Layout><SignIn/></Layout>}
-          />
+        <Route
+          path="/register"
+          element={<Layout>< Register /></Layout>}
+        />
 
-        { isLoggedIn && (
-            <>
+        <Route
+          path='/sign-in'
+          element={<Layout><SignIn /></Layout>}
+        />
+
+        {isLoggedIn && (
+          <>
             <Route
-              path='/add-hotel' 
-              element={<Layout><AddHotel/></Layout>
-              }
-              />
-            </>
-          )}
+              path='/add-hotel'
+              element={<Layout><AddHotel /></Layout>} />
+            <Route
+              path="/my-hotels"
+              element={<Layout>
+                <MyHotels />
+              </Layout>} />
+
+              <Route
+              path="/edit-hotel/:hotelId"
+              element={<Layout>
+                <EditHotels />
+              </Layout>} />
+
+          </> 
+        )}
 
 
-        <Route 
-            path='*' 
-            element={<Navigate to="/" />} 
+        <Route
+          path='*'
+          element={<Navigate to="/" />}
         />
 
       </Routes>

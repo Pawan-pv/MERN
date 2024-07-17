@@ -47,17 +47,4 @@ export const useAppContext = () => {
 }
 
 
-// context <API></API>
-// import userContext = React.createContext()
-
-// const usercontextProvider = ({ children }) = {
-//     return (
-//         <userContext.Provider>
-//         {
-//             ...............
-//         }
-//         </userContext.Provider>
-//     )
-// }
-
 

@@ -5,6 +5,8 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
+// import { HotelType } from "../../api-client";
+import { useEffect } from "react";
 
 export type HotelFormData = {
     name: string;
@@ -21,18 +23,49 @@ export type HotelFormData = {
     childCount: number;
 };
 
+export type HotelType = {
+    _id: string;
+    userId: string;
+    name: string;
+    city: string;
+    country: string;
+    description: string;
+    type: string;
+    adultCount: number;
+    childCount: number;
+    facilities: string[];
+    pricePerNight: number;
+    starRating: number;
+    imageUrls: string[];
+    lastUpdated: Date;
+    // bookings: BookingType[];
+  };
 type Props = {
-    onSave: (hotelFormData: FormData) => void
-    isLoading: boolean
+    hotel?: HotelType;
+    onSave: (hotelFormData: FormData) => void;
+    isLoading: boolean;
 }
 
-const ManageHotelForm = ({ onSave, isLoading }: Props) => {
+const ManageHotelForm = ({ onSave, isLoading , hotel}: Props) => {
     const formMethods = useForm<HotelFormData>();
-    const { handleSubmit } = formMethods;
+    const { handleSubmit, reset } = formMethods;
+
+     
+    // Here's a brief overview of what the reset function does:
+    
+    // Resets Form Values: It resets the values of all form fields to their initial values. If initial values are not provided, it resets them to empty values.
+
+   
+    useEffect(()=>{
+        reset(hotel)
+    },[hotel, reset])
 
     const onDataSubmit = handleSubmit((formDataJson: HotelFormData) => {
         const formData = new FormData();
-
+        if(hotel){
+            formData.append("hotelId", hotel._id)
+        }
+            
         formData.append("name", formDataJson.name);
         formData.append("city", formDataJson.city);
         formData.append("country", formDataJson.country);
@@ -61,7 +94,7 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
             console.error('imageFiles is not defined');
         }
         
-        console.log(formData)
+        // console.log(formData)
         onSave(formData);
     });
 
